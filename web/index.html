@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dionaea — an open, educational investigation into short-term memory, noisy sensors, and online decisions, inspired by the Venus flytrap.">
+  <title>Dionaea / Computational Biology Lab</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="noise-texture" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="mark" href="/" aria-label="Dionaea home"><span class="mark-icon">✳</span> DIONAEA<span class="mark-dot">.</span></a>
+    <div class="header-right"><span class="header-index">AN OPEN EXPERIMENT / 001</span><a href="#method" class="header-link">THE METHOD <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main>
+    <section class="intro-wrap">
+      <div class="eyebrow"><span class="pulse-dot"></span> COMPUTER SCIENCE × NATURAL SYSTEMS</div>
+      <h1>When does a<br><em>signal</em> become a <span class="decision-word">decision<span class="asterisk">*</span></span>?</h1>
+      <div class="intro-bottom">
+        <p>A computational experiment inspired by the <i>Dionaea muscipula</i> (Venus flytrap): how might short-term memory help a machine distinguish meaningful patterns from background noise?</p>
+        <div class="bio-note"><span class="bio-note-symbol">*</span><span>Nature inspired the question.<br>Algorithms test the answer.</span></div>
+      </div>
+    </section>
+
+    <section id="laboratory" class="lab-section">
+      <div class="section-top"><span>01 / EXPERIMENT LAB</span><span class="live-pill"><span class="status-dot"></span> LOCAL SIMULATION</span></div>
+      <div class="lab-headline"><div><h2>Signal laboratory</h2><p>Change the environment. Watch four different ways of deciding.</p></div><div class="experiment-id" id="experiment-id">SEED / 0042</div></div>
+      <div class="lab-layout">
+        <aside class="control-panel" aria-label="Experiment settings">
+          <div class="panel-title"><span>ENVIRONMENT</span><span>01 — 05</span></div>
+          <div class="control-group">
+            <label for="seed">Random seed <output id="seed-value">42</output></label>
+            <input id="seed" type="number" min="0" max="999999" step="1" value="42">
+            <p>Identical seed + settings = identical experiment.</p>
+          </div>
+          <div class="control-group"><label for="noise">Random noise <output id="noise-value">9%</output></label><input id="noise" type="range" min="0" max="35" value="9" step="1"><p>Chance of a spurious event each normal time step.</p></div>
+          <div class="control-group"><label for="signal">Real-event strength <output id="signal-value">67%</output></label><input id="signal" type="range" min="15" max="95" value="67" step="1"><p>Chance of an event during a true episode.</p></div>
+          <div class="control-group"><label for="burst">Noise bursts <output id="burst-value">0.6%</output></label><input id="burst" type="range" min="0" max="8" value="0.6" step="0.2"><p>Chance that noise starts a short, correlated cluster.</p></div>
+          <div class="panel-title secondary-panel-title"><span>DETECTOR SETTINGS</span><span>06 — 10</span></div>
+          <div class="control-group"><label for="window">Memory window <output id="window-value">6 steps</output></label><input id="window" type="range" min="1" max="20" value="6"><p>Pair + count: maximum look-back.</p></div>
+          <div class="control-group"><label for="count">Event count <output id="count-value">3</output></label><input id="count" type="range" min="2" max="6" value="3"><p>Events needed for sliding count.</p></div>
+          <div class="control-group"><label for="alpha">Memory retention α <output id="alpha-value">0.80</output></label><input id="alpha" type="range" min="0" max="98" value="80"><p>Leaky memory: how much survives each step.</p></div>
+          <div class="control-group"><label for="threshold">Evidence threshold <output id="threshold-value">1.60</output></label><input id="threshold" type="range" min="70" max="500" value="160" step="5"><p>Leaky memory: how much evidence triggers action.</p></div>
+          <div class="control-group"><label for="cooldown">Cooldown <output id="cooldown-value">6 steps</output></label><input id="cooldown" type="range" min="0" max="20" value="6"><p>All four methods share this alarm lockout.</p></div>
+          <button id="reset-btn" class="reset-btn" type="button"><span aria-hidden="true">↺</span> Reset to default</button>
+        </aside>
+        <div class="analysis-area">
+          <div class="analysis-toolbar"><div class="analysis-title"><span class="small-label">EVENT STREAM</span><strong>360 time steps <span class="muted">/ 5 hidden episodes</span></strong></div><div class="playback"><button id="replay" type="button" title="Play through time steps"><span id="play-icon">▶</span> Replay</button><button id="random" type="button" title="Choose a new random seed">↻ New seed</button></div></div>
+          <div class="chart-wrapper"><div id="chart" class="chart" role="img" aria-label="Event stream, true anomaly episodes, and alert locations for four detectors"></div><div id="chart-tip" class="chart-tip" role="status" aria-live="polite">Hover to examine a time step</div></div>
+          <div class="legend"><span><b class="legend-symbol event-symbol"></b> Observed event</span><span><b class="legend-symbol truth-symbol"></b> True episode</span><span><b class="legend-symbol alarm-symbol"></b> Detector alarm</span></div>
+          <div class="table-header"><span>DETECTOR PERFORMANCE</span><span id="data-state">SIMULATED — NOT EXPERIMENTAL BIOLOGY</span></div>
+          <div id="results-table" class="results-table" aria-live="polite"></div>
+          <p class="table-footnote">A true detection is the first alert within each labelled episode. Extra alerts—including repeated ones inside the same episode—are false alarms. Delay is measured from the episode start.</p>
+          <div class="insight-card"><div class="insight-icon">↳</div><div><strong>Make it a research question.</strong><p id="interpretation">Try increasing the burst rate. Do algorithms that accumulate evidence mistake repeated noise for a real event?</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section class="method-section" id="method">
+      <div class="section-top"><span>02 / THE METHOD</span><span>HOW THE EXPERIMENT WORKS</span></div>
+      <h2>Four algorithms.<br><em>One fair comparison.</em></h2>
+      <div class="method-grid">
+        <article><div class="method-number">01</div><h3>Single event</h3><p>Raise an alarm for any observed event. Fast, simple, often noisy.</p><code>trigger if xₜ = 1</code></article>
+        <article><div class="method-number">02</div><h3>Timed pair</h3><p>Wait for two events sufficiently close in time; an explicitly flytrap-inspired baseline.</p><code>two events within Δt</code></article>
+        <article><div class="method-number">03</div><h3>Sliding count</h3><p>Count recent events in a rolling window and compare against a fixed minimum.</p><code>count(window) ≥ k</code></article>
+        <article><div class="method-number">04</div><h3>Leaky evidence</h3><p>Accumulate evidence while retaining only a fraction of the preceding state.</p><code>Sₜ = αSₜ₋₁ + xₜ</code></article>
+      </div>
+      <div class="method-bottom"><div><span class="small-label">THE ACTUAL BIOLOGY</span><p>Venus flytraps use mechanosensation, electrical signalling and calcium dynamics. This is a <b>conceptual abstraction</b>, not a physiological simulator.</p></div><div><span class="small-label">THE EXPERIMENTAL LIMIT</span><p>Synthetic binary events are deliberately simple. Performance here does not establish clinical, industrial or general real-world suitability.</p></div></div>
+    </section>
+    <section class="bench-section" id="evidence"><div class="section-top"><span>03 / REPRODUCIBILITY</span><span>BEYOND A SINGLE EXAMPLE</span></div><div class="bench-layout"><div><h2>Don't trust<br><em>one lucky seed.</em></h2><p>One simulation can be misleading. The accompanying Python experiment selects parameters on 15 training seeds, freezes them, then evaluates all methods on 40 unseen seeds in each of four conditions.</p><p>Try <code>python -m dionaea.benchmark</code> to regenerate the results. Edit the cost of false alarms and see whether the ranking changes.</p></div><div class="bench-card"><div class="bench-card-top"><span>TEST PROTOCOL</span><span>SEE / experiments/RESULTS.md</span></div><div class="protocol-row"><span>01</span><strong>15</strong><small>training seeds</small></div><div class="protocol-row"><span>02</span><strong>40 × 4</strong><small>held-out tests</small></div><div class="protocol-row"><span>03</span><strong>4</strong><small>noise environments</small></div><div class="protocol-row"><span>04</span><strong>0</strong><small>claims of universal superiority</small></div></div></div></section>
+    <footer><div class="footer-brand">DIONAEA<span>.</span></div><div>FROM A BOTANIC GARDEN OBSERVATION TO A COMPUTATIONAL QUESTION.</div><a href="https://www.botanic-garden.ox.ac.uk/biomimetics-exploiting-plants-design-technology" target="_blank" rel="noopener">Oxford Botanic Garden ↗</a></footer>
+  </main>
+  <script src="/main.js" defer></script>
+</body>
+</html>
