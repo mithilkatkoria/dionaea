@@ -5,3 +5,11 @@ scripts
 .github
 .git
 *.log
+
+.env
+.env.*
+.vercel
+.venv
+**/__pycache__
+*.pem
+*.key
