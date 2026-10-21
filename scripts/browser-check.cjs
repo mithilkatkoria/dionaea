@@ -30,6 +30,20 @@ async function start(){
  await page.waitForFunction(()=>!document.querySelector('#regime').disabled);
  assert.equal(await page.locator('#results-table tbody tr').count(),4);pass('successful initial simulation and saved benchmark');
  const saved=await(await page.request.get(base+'/api/benchmark')).json();
+ const zero=await(await page.request.get(base+'/api/simulate?noise=0&signal=0&burst=0')).json();
+ await page.route('**/api/simulate?**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(zero)}));
+ await page.locator('#random').click();await ready(page);assert.equal((await page.locator('#results-table').textContent()).split('N/A').length-1,4);
+ await page.unroute('**/api/simulate?**');await page.locator('#reset-btn').click();await ready(page);pass('zero observed events show N/A detection delay');
+ let heldRoute;await page.route('**/api/simulate?**',r=>{heldRoute=r;});
+ await page.locator('#random').click();await page.waitForFunction(()=>document.querySelector('#chart').getAttribute('aria-busy')==='true');
+ for(let i=0;i<20&&!heldRoute;i++)await pause(50);
+ assert.ok(heldRoute);assert.equal(await page.locator('#replay').isDisabled(),true);assert.equal(await page.locator('#results-table tbody tr').count(),0);
+ await heldRoute.continue();await ready(page);await page.unroute('**/api/simulate?**');pass('loading state disables stale actions and clears old scores');
+ expectedFailure=true;await page.route('**/api/simulate?**',()=>{});await page.locator('#random').click();
+ await page.waitForFunction(()=>document.querySelector('#data-state').textContent==='UNAVAILABLE',{},{timeout:15000});
+ assert.ok((await page.locator('#request-message').textContent()).includes('timed out'));
+ await page.unroute('**/api/simulate?**');await page.locator('#retry-btn').click();await ready(page);expectedFailure=false;pass('request timeout and recovery');
+
  for(const width of [375,390,768,1024,1440]){
   await page.setViewportSize({width,height:1000});
   const layout=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth}));

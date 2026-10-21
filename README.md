@@ -6,6 +6,8 @@
 
 This is a **working, AI-assisted starter project**, intended to be studied, challenged and independently extended by a Year 12/13 student. It is not an original plant model or a claim to have invented anomaly detection. Scientific interpretation, synthetic experiments and author contributions are carefully separated.
 
+[Live laboratory](https://dionaea-seven.vercel.app) · [GitHub source](https://github.com/mithilkatkoria/dionaea)
+
 ## The project story
 
 The starting point was an in-person visit to Oxford Botanic Garden during the St John's Inspire summer-school Biomimicry Trail, with the original leaflet retained by the student. Further reading about flytrap signalling motivated a computational question about brief temporal memory. The visit supplies personal motivation, not measurements or institutional endorsement. This is an independent learning project; Oxford has not reviewed or endorsed it.
@@ -142,6 +144,7 @@ For browser QA only, install Node.js 22+ and run:
 npm ci
 npx playwright install chromium
 npm run test:browser
+python -m scripts.production_check https://dionaea-seven.vercel.app
 ```
 
 The script starts a local Python server if needed. To test a deployed site, set `BASE_URL` to its real HTTPS URL. Set `BROWSER_CHANNEL=msedge` to use an existing Edge installation. The browser suite checks the five specified widths, controls, keyboard/touch inspection, replay, failures, CSV export and WCAG A/AA rules using axe-core. These automated checks do not replace testing with real assistive technology.

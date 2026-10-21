@@ -22,8 +22,21 @@ Fixed low text contrast, missing keyboard focus for the scrolling chart, mouse-o
 
 ## Production status
 
-Public GitHub and Vercel publishing explicitly approved by the user on 2026-10-21. Production deployment is not yet verified. Verified links, application revision, GitHub Actions/build state, live routes and production-browser results will be recorded after deployment.
+Public website: https://dionaea-seven.vercel.app
+
+GitHub: https://github.com/mithilkatkoria/dionaea (public; verified owner `mithilkatkoria`). The accepted transfer preserves commit history. Vercel now confirms the Git repository is connected. The production site is accessible without login.
+
+Application revision verified: `eec674810761a4dcc213062ff586b1f51c290a09`.
+Vercel deployment: `dpl_8MYqgT1dWBaRPoU2KsbYcGt8eNTt`, state READY, target production.
+
+All 20 browser check groups pass against production, with zero unexpected console/HTTP errors and zero automated WCAG A/AA violations at all five widths. Production screenshots are in `screenshots/production/`; structured evidence is in `qa-production.json`.
+
+The live API audit passes 31 route/method checks. Default and changed-settings simulation responses match the local Python engine exactly. The deployed benchmark matches the saved JSON. Invalid/duplicate/non-finite queries return JSON 400; POST returns 405; HEAD has no body; unknown and private-source paths return 404. Security headers are present. Simulations use no-store, CSS/JS revalidate, and the edge consumes the benchmark's shared-cache directive. See `qa-api-production.json`.
+
+GitHub Actions passed the verified application revision. A Git-triggered production build of the corrected repository links and final CI verification are in progress.
 
 ## Remaining scientific and QA limits
 
 Synthetic binary signals; subjective costs and cooldown; no physical sensor study or significance test. Delay excludes misses, so interpret it with recall. The student must supply their own dated research contributions. Automated accessibility and emulated touch do not replace screen-reader and physical-device testing. Publisher sites can impose access restrictions even when bibliographic links are correct.
+
+Recent Vercel runtime error/fatal log inspection returned zero records in the available five-minute window. The CDN request query for HTTP 500+ returned zero records. The earlier one-hour runtime query exceeded Hobby retention, so that window is not claimed as verified.

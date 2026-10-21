@@ -13,3 +13,6 @@ playwright-report/
 test-results/
 *.pem
 *.key
+
+.vercel
+.env*

@@ -1,0 +1,288 @@
+{
+  "base": "https://dionaea-seven.vercel.app",
+  "passed": true,
+  "production_matches_local_python": true,
+  "benchmark_matches_saved": true,
+  "zero_events_and_null_delay": true,
+  "routes": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200,
+      "bytes": 13864,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/index.html",
+      "method": "GET",
+      "status": 200,
+      "bytes": 13864,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/style.css",
+      "method": "GET",
+      "status": 200,
+      "bytes": 17308,
+      "content_type": "text/css; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/main.js",
+      "method": "GET",
+      "status": 200,
+      "bytes": 12385,
+      "content_type": "application/javascript; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/favicon.svg",
+      "method": "GET",
+      "status": 200,
+      "bytes": 203,
+      "content_type": "image/svg+xml",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/robots.txt",
+      "method": "GET",
+      "status": 200,
+      "bytes": 25,
+      "content_type": "text/plain; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "status": 200,
+      "bytes": 81,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?seed=42",
+      "method": "GET",
+      "status": 200,
+      "bytes": 9738,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?seed=987&noise=0.2&alpha=0.9&threshold=2.3",
+      "method": "GET",
+      "status": 200,
+      "bytes": 10020,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?seed=42&noise=0&signal=0&burst=0",
+      "method": "GET",
+      "status": 200,
+      "bytes": 8743,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/benchmark",
+      "method": "GET",
+      "status": 200,
+      "bytes": 4032,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "public, max-age=0",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/api/benchmark",
+      "method": "GET",
+      "status": 200,
+      "bytes": 4032,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "public, max-age=0",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/api/simulate?seed=-1",
+      "method": "GET",
+      "status": 400,
+      "bytes": 34,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?seed=1000000",
+      "method": "GET",
+      "status": 400,
+      "bytes": 34,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?seed=",
+      "method": "GET",
+      "status": 400,
+      "bytes": 54,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?noise=NaN",
+      "method": "GET",
+      "status": 400,
+      "bytes": 32,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?alpha=inf",
+      "method": "GET",
+      "status": 400,
+      "bytes": 32,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?seed=1&seed=2",
+      "method": "GET",
+      "status": 400,
+      "bytes": 54,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate?extra=1",
+      "method": "GET",
+      "status": 400,
+      "bytes": 40,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/missing",
+      "method": "GET",
+      "status": 404,
+      "bytes": 459,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/api/missing",
+      "method": "GET",
+      "status": 404,
+      "bytes": 79,
+      "content_type": "text/plain; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": null
+    },
+    {
+      "path": "/.env",
+      "method": "GET",
+      "status": 404,
+      "bytes": 459,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/.git/config",
+      "method": "GET",
+      "status": 404,
+      "bytes": 459,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/app.py",
+      "method": "GET",
+      "status": 404,
+      "bytes": 459,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/dionaea/model.py",
+      "method": "GET",
+      "status": 404,
+      "bytes": 459,
+      "content_type": "text/html; charset=utf-8",
+      "cache_control": "public, max-age=0, must-revalidate",
+      "edge_cache": "HIT"
+    },
+    {
+      "path": "/api/simulate",
+      "method": "POST",
+      "status": 405,
+      "bytes": 48,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/simulate",
+      "method": "HEAD",
+      "status": 200,
+      "bytes": 0,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/benchmark",
+      "method": "POST",
+      "status": 405,
+      "bytes": 48,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/benchmark",
+      "method": "HEAD",
+      "status": 200,
+      "bytes": 0,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "public, max-age=0",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/health",
+      "method": "POST",
+      "status": 405,
+      "bytes": 48,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    },
+    {
+      "path": "/api/health",
+      "method": "HEAD",
+      "status": 200,
+      "bytes": 0,
+      "content_type": "application/json; charset=utf-8",
+      "cache_control": "no-store",
+      "edge_cache": "MISS"
+    }
+  ]
+}
