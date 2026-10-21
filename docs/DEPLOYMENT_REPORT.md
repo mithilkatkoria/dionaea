@@ -22,7 +22,7 @@ Fixed low text contrast, missing keyboard focus for the scrolling chart, mouse-o
 
 ## Production status
 
-Public GitHub publication was rejected by automatic approval review pending explicit confirmation of public visibility. No publication or successful deployment is claimed. Verified links, application revision, GitHub Actions/build state, live routes and production-browser results will be recorded after deployment.
+Public GitHub and Vercel publishing explicitly approved by the user on 2026-10-21. Production deployment is not yet verified. Verified links, application revision, GitHub Actions/build state, live routes and production-browser results will be recorded after deployment.
 
 ## Remaining scientific and QA limits
 
