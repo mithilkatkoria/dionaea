@@ -14,7 +14,7 @@ The starting point was an in-person visit to Oxford Botanic Garden during the St
 
 The browser laboratory compares four standard, causal detectors on the same synthetic binary stream. Guided presets help you explore balanced events, sparse genuine events and burst noise. A twelve-step teaching example shows the recorded state of all four methods, with no JavaScript duplicate of the algorithms. Change the controls, use Replay/Pause, inspect any revealed step with the keyboard or touch, reset the settings, or download the current synthetic CSV. The methods, saved held-out results, scientific sources and limitations sit alongside the experiment.
 
-![Desktop signal laboratory](docs/screenshots/desktop.png)
+![Desktop signal laboratory](docs/screenshots/learning-update/desktop.png)
 
 ## Quick start (Windows, macOS, Linux)
 
@@ -173,6 +173,8 @@ See [the publishing checklist](docs/PUBLISHING_CHECKLIST.md) and [deployment aud
 Known limits: synthetic binary data; subjective cost weights and cooldown; fixed scenario generator; no significance testing or physical sensor validation; mean detection delay excludes missed episodes; no original detector or physiological simulator is claimed. Reusing the existing held-out seeds for further tuning would invalidate their status as an untouched test set.
 
 ## Learn the rules on the site
+
+![Step-by-step decisions for the teaching sequence](docs/screenshots/learning-update/worked-example.png)
 
 Open [the worked example](https://dionaea-seven.vercel.app/#worked-example) and move to t = 2. For inputs 1, 0, 1, leaky evidence is 1, 0.8, 1.64, so it crosses the teaching threshold 1.6. A pair has also completed, but sliding count has only two events and needs three. At t = 3 the count fires, while leaky evidence starts again at 1 after its reset. The teaching example deliberately uses cooldown zero; the main laboratory starts with cooldown six.
 

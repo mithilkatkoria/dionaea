@@ -1,5 +1,26 @@
 # Dionaea production deployment audit
 
+## Learning update verified on 2026-10-22
+
+The public site now includes a twelve-step algorithm walkthrough, exploratory scenario presets, score definitions, detected-only benchmark delay, explanations of each environment's false-alert/recall trade-off and a practical independent-project roadmap. Navigation and mobile settings were refined while retaining the existing botanical laboratory design.
+
+- Application revision: `ea83edf6dbb324fe5e0b221e340f50f3e397b1de`.
+- [Successful application CI](https://github.com/mithilkatkoria/dionaea/actions/runs/39694413741).
+- Git-triggered production deployment: `dpl_C4Fnd6s2k8aLDcjMYEf7GP9xA8fK`, state READY, owner `mithilkatkoria`.
+- 32 Python tests pass, including hand-calculated teaching states, reset behavior and fixture/engine agreement.
+- All 23 expanded browser check groups pass locally and against the live URL. The example failure is isolated from the main lab and its retry recovers. Presets preserve the frozen published benchmark.
+- All 33 live route/method checks pass, including the new script and generated teaching asset.
+- Live HTML, JavaScript, CSS and teaching JSON match the committed source after LF normalization.
+- Zero global overflow and zero automated WCAG A/AA violations at 375, 390, 768, 1024 and 1440 pixels. The prior limits on automated accessibility and physical-device coverage still apply.
+
+The teaching sequence is fixed educational input with no truth labels or accuracy claim. `scripts/build_learning_example.py` calls the production Python `detect()` function and writes `public/learning-example.json`; the browser reads its recorded traces. No JavaScript detector implementation was added. It uses cooldown zero to expose each decision, while the main laboratory retains its default shared cooldown of six.
+
+The original detector, generator and evaluator code, published benchmark outputs and train/test split are unchanged. The benchmark regeneration check preserves the exact original SHA-256 hashes recorded below. The new teaching example and website work are Codex-assisted contributions, not an independently conducted student research study. The personal journal remains blank for the student's own work.
+
+Evidence: [browser QA](qa-learning-production.json), [live API QA](qa-learning-api-production.json), [asset comparison](qa-learning-static-production.json), [worked-example screenshot](screenshots/learning-update/worked-example.png), [mobile screenshot](screenshots/learning-update/mobile.png). Screenshots were inspected in the real browser review. This audit is saved in a subsequent documentation-only commit; application files are unchanged by that commit.
+
+## Original launch audit from 2026-10-21
+
 Audit date: 2026-10-21 (Europe/London). Status: verified production deployment.
 
 ## Verified destinations

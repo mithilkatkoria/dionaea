@@ -1,0 +1,31 @@
+{
+  "application_revision": "ea83edf6dbb324fe5e0b221e340f50f3e397b1de",
+  "date": "2026-10-22",
+  "files": [
+    {
+      "file": "index.html",
+      "matches": true,
+      "sha256_normalized": "89fac900fd40dc72e718fef56bf02d6c8e4cc7567469caeb4cfafb0737815e31"
+    },
+    {
+      "file": "main.js",
+      "matches": true,
+      "sha256_normalized": "4f88716c3fe82865379f0cded60465898acde631b2cdaefa79b128fd07cd7139"
+    },
+    {
+      "file": "learning.js",
+      "matches": true,
+      "sha256_normalized": "b993a12826322d730669eb19891333502ba77d9028a755df71a9aad6a55c49c9"
+    },
+    {
+      "file": "style.css",
+      "matches": true,
+      "sha256_normalized": "fd935289df5141af3074ec9b822c5bc989359876b092d8424df7c789130c8291"
+    },
+    {
+      "file": "learning-example.json",
+      "matches": true,
+      "sha256_normalized": "98672967eb411213024a82eda6cb8b1e05ee9163ee4064605042dfd1c0e973ab"
+    }
+  ]
+}
