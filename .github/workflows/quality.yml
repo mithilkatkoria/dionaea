@@ -20,6 +20,7 @@ jobs:
       - run: python -m scripts.check_reproducibility
       - run: git diff --exit-code -- experiments/RESULTS.md experiments/benchmark_results.json
       - run: node --check public/main.js
+      - run: node --check public/learning.js
       - run: python -m compileall -q .
       - run: npm ci --ignore-scripts
       - run: npx playwright install --with-deps chromium

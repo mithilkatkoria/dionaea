@@ -88,7 +88,7 @@ function inspect(step){
   if(!data) return;
   const max=Math.max(0,Math.min(cursor,data.events.length)-1);
   const t=Math.max(0,Math.min(max,Math.floor(step)));
-  $('inspect-step').max=String(max); $('inspect-step').value=String(t); $('inspect-value').textContent=String(t);
+  $('inspect-step').max=String(max); $('inspect-step').value=String(t); if($('inspect-value').textContent!==String(t)) $('inspect-value').textContent=String(t);
   if(cursor===0){const message='Replay is at the beginning. No steps have been revealed.';$('inspect-detail').textContent=message;$('chart-tip').textContent=message;return;}
   const alarms=Object.keys(labels).filter(k=>data.detectors[k].alarms.includes(t)).map(k=>labels[k]);
   const text=`Step ${t}: observed event ${data.events[t]}; ${data.truth[t]?'true episode':'background'}; alarms: ${alarms.join(', ')||'none'}.`;
@@ -133,7 +133,7 @@ function drawTable(){
   }).join('');
   $('results-table').innerHTML=`<table><caption class="sr-only">Full-run detector performance on this synthetic stream. Delay in simulation steps, detected episodes only.</caption><thead><tr><th scope="col">Detector</th><th scope="col">Detected</th><th scope="col">False alerts</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">Delay*</th></tr></thead><tbody>${rows}</tbody></table>`;
   const p=params();
-  $('interpretation').textContent=p.burst>0.03?'Clustered background noise may imitate true events. Watch for false alarms from detectors that rely on repeated evidence.':p.signal<0.4?'Sparse true events can be missed by cautious detectors. Suppressing false alarms can reduce recall.':p.noise>0.2?'Frequent random events create false positives. A longer memory window can sometimes make this worse.':'Try increasing noise bursts or lowering real-event strength. Does the best detector change?';
+  $('interpretation').textContent=p.burst>=0.02?'Clustered background noise may imitate true events. Watch for false alarms from detectors that rely on repeated evidence.':p.signal<0.4?'Sparse true events can be missed by cautious detectors. Suppressing false alarms can reduce recall.':p.noise>0.2?'Frequent random events create false positives. A longer memory window can sometimes make this worse.':'Try increasing noise bursts or lowering real-event strength. Does the best detector change?';
 }
 function play(){
   if(frame!==null){cleanStop();return;}
@@ -155,15 +155,27 @@ function play(){
   };
   frame=requestAnimationFrame(tick);
 }
-function schedule(){updateOutputs();invalidate();clearTimeout(debounce);debounce=setTimeout(refresh,160);}
+function schedule(){clearPreset();updateOutputs();invalidate();clearTimeout(debounce);debounce=setTimeout(refresh,160);}
 function drawBenchmark(){
   if(!benchmark)return;
   const regime=$('regime').value;
+  const results=benchmark.results[regime];
+  const lowest=Object.keys(labels).reduce((best,method)=>results[method].cost<results[best].cost?method:best,'single');
   const rows=Object.keys(labels).map(k=>{
-    const m=benchmark.results[regime][k];
-    return `<tr><th scope="row">${labels[k]}</th><td>${(m.recall*100).toFixed(1)}%</td><td>${(m.precision*100).toFixed(1)}%</td><td>${m.fp.toFixed(2)}</td><td>${m.cost.toFixed(2)} ± ${m.cost_sd.toFixed(2)}</td></tr>`;
+    const m=results[k];
+    return `<tr${k===lowest?' class="lowest-cost"':''}><th scope="row">${labels[k]}${k===lowest?'<span class="lowest-label">Lowest mean cost</span>':''}</th><td>${(m.recall*100).toFixed(1)}%</td><td>${(m.precision*100).toFixed(1)}%</td><td>${m.fp.toFixed(2)}</td><td>${m.mean_delay_detected_only===null?'N/A':m.mean_delay_detected_only.toFixed(2)}</td><td>${m.cost.toFixed(2)} ± ${m.cost_sd.toFixed(2)}</td></tr>`;
   }).join('');
-  $('benchmark-table').innerHTML=`<table><caption class="sr-only">Held-out synthetic results for ${regime}. Mean cost and sample standard deviation over 40 seeds.</caption><thead><tr><th scope="col">Detector</th><th scope="col">Recall</th><th scope="col">Precision</th><th scope="col">False alerts</th><th scope="col">Cost ± SD</th></tr></thead><tbody>${rows}</tbody></table>`;
+  $('benchmark-table').innerHTML=`<table><caption class="sr-only">Held-out synthetic results for ${regime}. Mean cost and sample standard deviation over 40 seeds. Delay uses detected episodes only.</caption><thead><tr><th scope="col">Detector</th><th scope="col">Recall</th><th scope="col">Precision</th><th scope="col">False alerts</th><th scope="col">Delay (steps)</th><th scope="col">Cost ± SD</th></tr></thead><tbody>${rows}</tbody></table>`;
+  const single=results.single, leaky=results.leaky;
+  const notes=[
+    ['False alerts per stream', `${single.fp.toFixed(2)} with single-event detection; ${leaky.fp.toFixed(2)} with leaky evidence.`],
+    ['The price of caution', `Recall changes from ${(single.recall*100).toFixed(1)}% to ${(leaky.recall*100).toFixed(1)}%. Report both false alarms and misses.`],
+    ['Read the ranking carefully', `${labels[lowest]} has the lowest mean cost in this environment under the chosen penalty weights. This is a descriptive result, not proof of superiority.`]
+  ];
+  $('benchmark-reading').replaceChildren(...notes.map(([title,text])=>{
+    const article=document.createElement('article'), heading=document.createElement('h3'), paragraph=document.createElement('p');
+    heading.textContent=title; paragraph.textContent=text; article.append(heading,paragraph); return article;
+  }));
 }
 async function loadBenchmark(){
   try{
@@ -178,8 +190,22 @@ async function loadBenchmark(){
     $('regime').replaceChildren(new Option('Results unavailable',''));
   }
 }
+const presetValues={balanced:{noise:9,signal:67,burst:0},sparse:{noise:9,signal:30,burst:0},bursts:{noise:6,signal:67,burst:2.7}};
+const presetNotes={balanced:'Independent background noise. Compare false alerts with missed episodes.',sparse:'Genuine episodes contain fewer events. Predict which cautious methods may miss them.',bursts:'Background events arrive in clusters. Repeated noise can imitate genuine evidence.'};
+function clearPreset(){
+  document.querySelectorAll('[data-preset]').forEach(button=>button.setAttribute('aria-pressed','false'));
+  $('preset-status').textContent='Custom exploration. The frozen published benchmark is not changed by these controls.';
+}
+document.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{
+  const preset=button.dataset.preset;
+  ids.forEach(id=>$(id).value=({...defaults,...presetValues[preset]})[id]);
+  document.querySelectorAll('[data-preset]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+  $('preset-status').textContent=presetNotes[preset]+' Detector settings use the shared exploratory defaults, not the trained benchmark settings.';
+  refresh();
+}));
+if(window.matchMedia('(max-width:740px)').matches) $('detector-controls').open=false;
 ids.forEach(id=>$(id).addEventListener('input',schedule));
-$('reset-btn').addEventListener('click',()=>{ids.forEach(id=>$(id).value=defaults[id]);refresh();});
+$('reset-btn').addEventListener('click',()=>{clearPreset();ids.forEach(id=>$(id).value=defaults[id]);refresh();});
 $('retry-btn').addEventListener('click',refresh);
 $('random').addEventListener('click',()=>{const seed=crypto.getRandomValues(new Uint32Array(1))[0]%1000000;$('seed').value=seed===number('seed')?(seed+1)%1000000:seed;refresh();});
 $('replay').addEventListener('click',play);

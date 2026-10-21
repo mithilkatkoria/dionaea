@@ -7,6 +7,7 @@ import urllib.error
 from dionaea.evaluate import simulate
 from dionaea.detectors import Settings
 from dionaea.model import Scenario
+from scripts.build_learning_example import build_example
 
 parser = argparse.ArgumentParser()
 parser.add_argument("url")
@@ -39,8 +40,9 @@ def probe(path, expected=200, method="GET"):
     return body
 
 
-for route in ("/", "/index.html", "/style.css", "/main.js", "/favicon.svg", "/robots.txt", "/api/health"):
+for route in ("/", "/index.html", "/style.css", "/main.js", "/learning.js", "/favicon.svg", "/robots.txt", "/api/health"):
     probe(route)
+assert json.loads(probe("/learning-example.json")) == build_example(), "Teaching trace differs from Python"
 actual = json.loads(probe("/api/simulate?seed=42"))
 assert actual == simulate(Scenario(), Settings()), "Production algorithm differs from local Python"
 assert json.loads(probe("/api/simulate?seed=987&noise=0.2&alpha=0.9&threshold=2.3")) == simulate(

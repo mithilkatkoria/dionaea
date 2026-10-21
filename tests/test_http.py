@@ -102,7 +102,7 @@ class HTTPTests(unittest.TestCase):
                 self.assertGreater(int(headers["Content-Length"]), 0)
 
     def test_static_routes(self):
-        for path in ("/", "/index.html", "/main.js", "/style.css", "/favicon.svg", "/robots.txt"):
+        for path in ("/", "/index.html", "/main.js", "/style.css", "/learning.js", "/learning-example.json", "/favicon.svg", "/robots.txt"):
             with self.subTest(path=path):
                 status, headers, body = self.request(path)
                 self.assertEqual(status, 200)

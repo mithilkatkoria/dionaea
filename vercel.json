@@ -35,7 +35,7 @@
       ]
     },
     {
-      "source": "/(main.js|style.css)",
+      "source": "/(main.js|learning.js|learning-example.json|style.css)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -1,0 +1,145 @@
+{
+  "kind": "teaching_example",
+  "description": "A handmade binary sequence, not measured data. No truth labels or performance scores.",
+  "events": [
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0
+  ],
+  "settings": {
+    "window": 3,
+    "count": 3,
+    "alpha": 0.8,
+    "threshold": 1.6,
+    "cooldown": 0
+  },
+  "detectors": {
+    "single": {
+      "method": "single",
+      "name": "Single event",
+      "alarms": [
+        0,
+        2,
+        3,
+        7,
+        9
+      ],
+      "confidence": [
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "settings": {
+        "window": 3,
+        "count": 3,
+        "alpha": 0.8,
+        "threshold": 1.6,
+        "cooldown": 0
+      }
+    },
+    "pair": {
+      "method": "pair",
+      "name": "Two events / timed window",
+      "alarms": [
+        2,
+        9
+      ],
+      "confidence": [
+        1.0,
+        1.0,
+        2.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        2.0,
+        0.0,
+        0.0
+      ],
+      "settings": {
+        "window": 3,
+        "count": 3,
+        "alpha": 0.8,
+        "threshold": 1.6,
+        "cooldown": 0
+      }
+    },
+    "count": {
+      "method": "count",
+      "name": "Sliding-window count",
+      "alarms": [
+        3
+      ],
+      "confidence": [
+        1.0,
+        1.0,
+        2.0,
+        3.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        2.0,
+        2.0,
+        1.0
+      ],
+      "settings": {
+        "window": 3,
+        "count": 3,
+        "alpha": 0.8,
+        "threshold": 1.6,
+        "cooldown": 0
+      }
+    },
+    "leaky": {
+      "method": "leaky",
+      "name": "Leaky evidence accumulator",
+      "alarms": [
+        2,
+        9
+      ],
+      "confidence": [
+        1.0,
+        0.8,
+        1.64,
+        1.0,
+        0.8,
+        0.64,
+        0.512,
+        1.4096,
+        1.12768,
+        1.90214,
+        0.0,
+        0.0
+      ],
+      "settings": {
+        "window": 3,
+        "count": 3,
+        "alpha": 0.8,
+        "threshold": 1.6,
+        "cooldown": 0
+      }
+    }
+  }
+}
