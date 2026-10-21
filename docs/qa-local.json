@@ -1,0 +1,137 @@
+{
+  "base": "http://127.0.0.1:8765",
+  "checks": [
+    {
+      "name": "successful initial simulation and saved benchmark",
+      "passed": true
+    },
+    {
+      "name": "five responsive widths and zero automated WCAG A/AA violations",
+      "passed": true
+    },
+    {
+      "name": "all eight sliders recalculate through the Python API",
+      "passed": true
+    },
+    {
+      "name": "manual seed and new seed",
+      "passed": true
+    },
+    {
+      "name": "invalid and empty seed states",
+      "passed": true
+    },
+    {
+      "name": "replay timing, pause, keyboard inspector and future-step restriction",
+      "passed": true,
+      "revealedAfter500ms": 26
+    },
+    {
+      "name": "replay completes in elapsed time",
+      "passed": true,
+      "remainingReplayMs": 6737
+    },
+    {
+      "name": "reset stops replay and restores defaults",
+      "passed": true
+    },
+    {
+      "name": "synthetic CSV download",
+      "passed": true
+    },
+    {
+      "name": "published environment selector",
+      "passed": true
+    },
+    {
+      "name": "HTTP failure clears stale results and retry recovers",
+      "passed": true
+    },
+    {
+      "name": "network failure and recovery",
+      "passed": true
+    },
+    {
+      "name": "stale requests cannot replace newer results",
+      "passed": true
+    },
+    {
+      "name": "skip link, keyboard order and visible focus",
+      "passed": true
+    },
+    {
+      "name": "scientific and reproducibility links present and safe",
+      "passed": true
+    },
+    {
+      "name": "touch replay, reset and step inspection",
+      "passed": true
+    },
+    {
+      "name": "no unexpected console errors or failing HTTP responses",
+      "passed": true
+    }
+  ],
+  "widths": [
+    {
+      "width": 375,
+      "scrollWidth": 375
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 375,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 768,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1024,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    }
+  ],
+  "consoleErrors": [],
+  "failedResponses": [],
+  "passed": true
+}

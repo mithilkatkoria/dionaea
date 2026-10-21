@@ -3,14 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Dionaea — an open, educational investigation into short-term memory, noisy sensors, and online decisions, inspired by the Venus flytrap.">
-  <title>Dionaea / Computational Biology Lab</title>
+  <meta name="description" content="Dionaea - an open, educational investigation into short-term memory, noisy sensors, and online decisions, inspired by the Venus flytrap.">
+  <title>Dionaea / Signal Laboratory</title>
+  <link rel="icon" href="/favicon.svg">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <a href="#laboratory" class="skip-link">Skip to the experiment</a>
   <div class="noise-texture" aria-hidden="true"></div>
   <header class="site-header">
-    <a class="mark" href="/" aria-label="Dionaea home"><span class="mark-icon">✳</span> DIONAEA<span class="mark-dot">.</span></a>
+    <a class="mark" href="/" aria-label="Dionaea home"><span class="mark-icon">✳</span> DIONAEA<span class="mark-dot" aria-hidden="true">.</span></a>
     <div class="header-right"><span class="header-index">AN OPEN EXPERIMENT / 001</span><a href="#method" class="header-link">THE METHOD <span aria-hidden="true">↗</span></a></div>
   </header>
   <main>
@@ -24,20 +26,20 @@
     </section>
 
     <section id="laboratory" class="lab-section">
-      <div class="section-top"><span>01 / EXPERIMENT LAB</span><span class="live-pill"><span class="status-dot"></span> LOCAL SIMULATION</span></div>
+      <div class="section-top"><span>01 / EXPERIMENT LAB</span><span class="live-pill"><span class="status-dot"></span> SYNTHETIC SIMULATION</span></div>
       <div class="lab-headline"><div><h2>Signal laboratory</h2><p>Change the environment. Watch four different ways of deciding.</p></div><div class="experiment-id" id="experiment-id">SEED / 0042</div></div>
       <div class="lab-layout">
         <aside class="control-panel" aria-label="Experiment settings">
-          <div class="panel-title"><span>ENVIRONMENT</span><span>01 — 05</span></div>
+          <div class="panel-title"><span>ENVIRONMENT</span><span>01 - 05</span></div>
           <div class="control-group">
             <label for="seed">Random seed <output id="seed-value">42</output></label>
-            <input id="seed" type="number" min="0" max="999999" step="1" value="42">
+            <input id="seed" required type="number" min="0" max="999999" step="1" value="42">
             <p>Identical seed + settings = identical experiment.</p>
           </div>
           <div class="control-group"><label for="noise">Random noise <output id="noise-value">9%</output></label><input id="noise" type="range" min="0" max="35" value="9" step="1"><p>Chance of a spurious event each normal time step.</p></div>
           <div class="control-group"><label for="signal">Real-event strength <output id="signal-value">67%</output></label><input id="signal" type="range" min="15" max="95" value="67" step="1"><p>Chance of an event during a true episode.</p></div>
           <div class="control-group"><label for="burst">Noise bursts <output id="burst-value">0.6%</output></label><input id="burst" type="range" min="0" max="8" value="0.6" step="0.2"><p>Chance that noise starts a short, correlated cluster.</p></div>
-          <div class="panel-title secondary-panel-title"><span>DETECTOR SETTINGS</span><span>06 — 10</span></div>
+          <div class="panel-title secondary-panel-title"><span>DETECTOR SETTINGS</span><span>06 - 10</span></div>
           <div class="control-group"><label for="window">Memory window <output id="window-value">6 steps</output></label><input id="window" type="range" min="1" max="20" value="6"><p>Pair + count: maximum look-back.</p></div>
           <div class="control-group"><label for="count">Event count <output id="count-value">3</output></label><input id="count" type="range" min="2" max="6" value="3"><p>Events needed for sliding count.</p></div>
           <div class="control-group"><label for="alpha">Memory retention α <output id="alpha-value">0.80</output></label><input id="alpha" type="range" min="0" max="98" value="80"><p>Leaky memory: how much survives each step.</p></div>
@@ -47,15 +49,19 @@
         </aside>
         <div class="analysis-area">
           <div class="analysis-toolbar"><div class="analysis-title"><span class="small-label">EVENT STREAM</span><strong>360 time steps <span class="muted">/ 5 hidden episodes</span></strong></div><div class="playback"><button id="replay" type="button" title="Play through time steps"><span id="play-icon">▶</span> Replay</button><button id="random" type="button" title="Choose a new random seed">↻ New seed</button></div></div>
-          <div class="chart-wrapper"><div id="chart" class="chart" role="img" aria-label="Event stream, true anomaly episodes, and alert locations for four detectors"></div><div id="chart-tip" class="chart-tip" role="status" aria-live="polite">Hover to examine a time step</div></div>
+          <p id="request-message" class="request-message" role="status">Loading the simulation...</p><button id="retry-btn" class="secondary-button" type="button" hidden>Retry simulation</button>
+          <div class="chart-wrapper"><div id="chart" class="chart" role="img" tabindex="0" aria-describedby="inspect-detail" aria-label="Event stream, true anomaly episodes, and alert locations for four detectors"></div><div id="chart-tip" class="chart-tip" >Point at the chart or use the time-step inspector below</div></div>
+          <div class="step-inspector"><label for="inspect-step">Inspect time step <output id="inspect-value" for="inspect-step">0</output></label><input id="inspect-step" type="range" min="0" max="359" value="0" aria-describedby="inspect-detail"><p id="inspect-detail" role="status">The inspector will be available when the stream loads.</p></div>
           <div class="legend"><span><b class="legend-symbol event-symbol"></b> Observed event</span><span><b class="legend-symbol truth-symbol"></b> True episode</span><span><b class="legend-symbol alarm-symbol"></b> Detector alarm</span></div>
-          <div class="table-header"><span>DETECTOR PERFORMANCE</span><span id="data-state">SIMULATED — NOT EXPERIMENTAL BIOLOGY</span></div>
-          <div id="results-table" class="results-table" aria-live="polite"></div>
-          <p class="table-footnote">A true detection is the first alert within each labelled episode. Extra alerts—including repeated ones inside the same episode—are false alarms. Delay is measured from the episode start.</p>
+          <div class="table-header"><span>DETECTOR PERFORMANCE</span><span id="data-state">SIMULATED - NOT EXPERIMENTAL BIOLOGY</span></div>
+          <div id="results-table" class="results-table" tabindex="0" role="region" aria-label="Detector performance, scroll horizontally to see all columns"></div>
+          <p class="table-footnote">A true detection is the first alert within each labelled episode. Extra alerts-including repeated ones inside the same episode-are false alarms. Delay is measured from the episode start for detected episodes only. N/A means no detection. Replay animates causal traces; this summary always covers the complete run.</p>
+          <button id="download-btn" type="button" class="secondary-button" disabled>Download this synthetic stream (CSV)</button>
           <div class="insight-card"><div class="insight-icon">↳</div><div><strong>Make it a research question.</strong><p id="interpretation">Try increasing the burst rate. Do algorithms that accumulate evidence mistake repeated noise for a real event?</p></div></div>
         </div>
       </div>
     </section>
+    <section class="origin-section" aria-labelledby="origin-title"><div><span class="small-label">THE STARTING QUESTION</span><h2 id="origin-title">A trail, a flytrap,<br><em>a question about memory.</em></h2></div><div><p>The starting point was a visit to Oxford Botanic Garden during the St John's Inspire summer-school Biomimicry Trail. The original trail leaflet prompted an interest in how biological ideas can inspire technology.</p><p>Further reading about flytrap signalling led to a smaller Computer Science question: can remembering recent binary events reduce false alerts, and what does that cost in missed episodes and delay?</p><p class="origin-note">An independent, initially AI-assisted learning project. The visit is personal motivation. Oxford has not reviewed or endorsed the project, and no plant measurements are used here.</p></div></section>
     <section class="method-section" id="method">
       <div class="section-top"><span>02 / THE METHOD</span><span>HOW THE EXPERIMENT WORKS</span></div>
       <h2>Four algorithms.<br><em>One fair comparison.</em></h2>
@@ -68,8 +74,10 @@
       <div class="method-bottom"><div><span class="small-label">THE ACTUAL BIOLOGY</span><p>Venus flytraps use mechanosensation, electrical signalling and calcium dynamics. This is a <b>conceptual abstraction</b>, not a physiological simulator.</p></div><div><span class="small-label">THE EXPERIMENTAL LIMIT</span><p>Synthetic binary events are deliberately simple. Performance here does not establish clinical, industrial or general real-world suitability.</p></div></div>
     </section>
     <section class="bench-section" id="evidence"><div class="section-top"><span>03 / REPRODUCIBILITY</span><span>BEYOND A SINGLE EXAMPLE</span></div><div class="bench-layout"><div><h2>Don't trust<br><em>one lucky seed.</em></h2><p>One simulation can be misleading. The accompanying Python experiment selects parameters on 15 training seeds, freezes them, then evaluates all methods on 40 unseen seeds in each of four conditions.</p><p>Try <code>python -m dionaea.benchmark</code> to regenerate the results. Edit the cost of false alarms and see whether the ranking changes.</p></div><div class="bench-card"><div class="bench-card-top"><span>TEST PROTOCOL</span><span>SEE / experiments/RESULTS.md</span></div><div class="protocol-row"><span>01</span><strong>15</strong><small>training seeds</small></div><div class="protocol-row"><span>02</span><strong>40 × 4</strong><small>held-out tests</small></div><div class="protocol-row"><span>03</span><strong>4</strong><small>noise environments</small></div><div class="protocol-row"><span>04</span><strong>0</strong><small>claims of universal superiority</small></div></div></div></section>
+    <section class="published-section" aria-labelledby="results-title"><div class="section-top"><span>04 / RESULTS &amp; SOURCES</span><span>REPRODUCIBLE SYNTHETIC EVIDENCE</span></div><h2 id="results-title">Memory has a cost.</h2><p>The published settings are selected on training seeds 1000-1014, then frozen for test seeds 2000-2039. Interactive controls above are exploratory and do not retune these results. Lower cost uses the chosen formula <code>4 × misses + 2 × false alarms + 0.03 × total delay</code>.</p><label for="regime">Published test environment</label><select id="regime" disabled><option>Loading saved results...</option></select><p id="benchmark-state" role="status">Loading the reproducible benchmark...</p><div id="benchmark-table" class="results-table" tabindex="0" role="region" aria-label="Published benchmark, scroll horizontally to see all columns"></div><p class="table-footnote">Values are means over 40 synthetic streams per environment. Cost includes sample standard deviation. These are descriptive results, without a significance test or real-world validation. Burst noise can imitate genuine evidence; sparse events can defeat cautious detectors.</p><div class="source-grid"><div><h3>Read the science</h3><ul><li><a href="https://doi.org/10.1111/nph.19113" target="_blank" rel="noopener">Hedrich &amp; Kreuzer (2023): flytrap action potentials</a></li><li><a href="https://www.nature.com/articles/s41477-020-00773-1" target="_blank" rel="noopener">Suda et al. (2020): calcium dynamics</a></li><li><a href="https://www.sciencedirect.com/science/article/pii/S0168945226000385" target="_blank" rel="noopener">Rahman (2026): a secondary threshold reinterpretation</a></li><li><a href="https://www.botanic-garden.ox.ac.uk/biomimetics-exploiting-plants-design-technology" target="_blank" rel="noopener">Oxford Botanic Garden: biomimetics context</a></li></ul></div><div><h3>Reproduce &amp; question</h3><p>Four standard algorithms, one shared cooldown. Binary labels define episodes independently of predictions. A second alarm inside an already detected episode counts as false.</p><p><a href="https://github.com/Mithil-Katkoria/dionaea">Code, method, limitations &amp; contribution record</a></p><p><a href="/api/benchmark" download="dionaea-benchmark.json">Download the published benchmark (JSON)</a></p></div></div></section>
     <footer><div class="footer-brand">DIONAEA<span>.</span></div><div>FROM A BOTANIC GARDEN OBSERVATION TO A COMPUTATIONAL QUESTION.</div><a href="https://www.botanic-garden.ox.ac.uk/biomimetics-exploiting-plants-design-technology" target="_blank" rel="noopener">Oxford Botanic Garden ↗</a></footer>
   </main>
+  <noscript><p class="request-message">Enable JavaScript to run the interactive experiment. The method and scientific sources remain available above.</p></noscript>
   <script src="/main.js" defer></script>
 </body>
 </html>

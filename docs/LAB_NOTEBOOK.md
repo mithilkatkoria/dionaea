@@ -22,7 +22,7 @@ Do not retroactively invent findings. Write entries as you actually investigate.
 
 **Next experiment:**
 
-## Entry 0 — Starter implementation (label honestly)
+## Entry 0 - Starter implementation (label honestly)
 
 The first working version was scaffolded with AI assistance in October 2026. The initial benchmark results in `experiments/RESULTS.md` came from that implementation. They are reproducible illustrative outputs, not my independent scientific findings until I have checked, understood and replicated them.
 

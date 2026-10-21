@@ -1,4 +1,4 @@
-# Dionaea explained from zero — the Computer Science you must understand
+# Dionaea explained from zero - the Computer Science you must understand
 
 This guide assumes Year 12 mathematical and Python knowledge. It deliberately avoids graduate-level biology, machine learning or statistics.
 

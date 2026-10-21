@@ -4,3 +4,12 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 *.log
+.env
+.env.*
+!.env.example
+.vercel/
+node_modules/
+playwright-report/
+test-results/
+*.pem
+*.key

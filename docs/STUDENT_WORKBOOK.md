@@ -1,31 +1,31 @@
-# Student workbook — make this a genuine Year 12/13 supercurricular
+# Student workbook - make this a genuine Year 12/13 supercurricular
 
 The supplied code is a functional **AI-assisted starter implementation**, not evidence that you personally designed every component. Keep this file in your repository and record your real work. The academic value starts when you understand, question and extend it.
 
 ## Six-week plan (approximately 3–5 hours each week)
 
-### Week 1 — Understand the phenomenon (3h)
+### Week 1 - Understand the phenomenon (3h)
 - [ ] Revisit your original Biomimicry Trail leaflet and write three observations you remember genuinely noticing.
 - [ ] Read the abstract and selected figures of Suda et al. (2020), then the accessible Hedrich (2023) review.
 - [ ] Explain to someone the difference between 'plant memory' and computer RAM.
 - [ ] Write 150 words on what this model deliberately leaves out.
 - **Evidence:** own notes, annotated reading and a dated entry in `docs/LAB_NOTEBOOK.md`.
 
-### Week 2 — Own the algorithms (4h)
+### Week 2 - Own the algorithms (4h)
 - [ ] Work through six time steps of `S_t = alpha*S_(t-1) + x_t` by hand with alpha 0.8, starting at zero.
 - [ ] Draw your own state-machine diagram for the timed-pair detector.
 - [ ] Locate and explain `detect()` in `dionaea/detectors.py`; intentionally break a test, then restore it.
 - [ ] Write one new unit test covering a tricky event boundary or cooldown reset.
 - **Evidence:** derivation, diagram, explanatory commit, your own new test.
 
-### Week 3 — Form a falsifiable hypothesis (3h)
+### Week 3 - Form a falsifiable hypothesis (3h)
 - [ ] Write your expected winner on the four test regimes BEFORE inspecting new results.
 - [ ] Run `python -m dionaea.benchmark` and read `experiments/RESULTS.md`.
 - [ ] Explain the difference between recall and precision using a concrete false-alarm example.
 - [ ] Explain why changing settings until they work on test seeds is cheating.
 - **Evidence:** dated prediction and reflection explaining surprises.
 
-### Week 4 — Independent extension (5h)
+### Week 4 - Independent extension (5h)
 Choose **one**, don't add everything:
 - [ ] A: Compare performance under different false-positive costs, with train-only retuning.
 - [ ] B: Design and test a two-stage detector (pair followed by leaky evidence) and compare it fairly.
@@ -33,14 +33,14 @@ Choose **one**, don't add everything:
 - [ ] D: Modify synthetic noise to include long clusters and test whether detector rankings change.
 - **Evidence:** new code, test, graph, clear negative results where applicable.
 
-### Week 5 — Reality check (4h)
+### Week 5 - Reality check (4h)
 - [ ] Record your own small binary event dataset, such as controlled tapping on a keyboard/desk at known intervals.
 - [ ] Separately mark the periods you intentionally generated true tapping patterns.
 - [ ] Write `t,event,label` CSV and run `python -m dionaea.field_data your_file.csv`.
 - [ ] Compare this to simulated results and openly discuss what changed.
 - **Evidence:** dataset, reproducible protocol and method for obtaining ground truth.
 
-### Week 6 — Academic explanation (4h)
+### Week 6 - Academic explanation (4h)
 - [ ] Create a 2–3 page report in your own words: question, model, method, results, limitations, next question.
 - [ ] Make one annotated graph from the actual results; say what the graph can and cannot establish.
 - [ ] Practise the interview questions below *without reading a script*.
@@ -60,7 +60,7 @@ Choose **one**, don't add everything:
 9. Which assumptions in the synthetic data generator do you distrust most?
 10. Which part did you build or modify yourself, and which part came from an AI-assisted starting point?
 
-## UCAS 2026-onwards format — where this belongs
+## UCAS 2026-onwards format - where this belongs
 
 - **Question 1 (motivation):** The visit prompted curiosity about biological systems as information processors. One sentence is enough.
 - **Question 2 (academic preparation):** A-level maths / relevant mathematical reasoning such as recurrence relations, probability and algorithm analysis where it genuinely connects to your studies.

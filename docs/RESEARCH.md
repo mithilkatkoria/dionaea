@@ -10,7 +10,7 @@ The leaflet describes biological mechanisms being used to inspire engineering an
 
 1. Oxford Botanic Garden, *Biomimetics: exploiting plants for design in technology*. https://www.botanic-garden.ox.ac.uk/biomimetics-exploiting-plants-design-technology
    - Context for the interdisciplinary plant-to-engineering approach; especially pitcher plants.
-2. R. Hedrich (2023), *Demystifying the Venus flytrap action potential*, **New Phytologist**. https://doi.org/10.1111/nph.19113
+2. R. Hedrich & I. Kreuzer (2023), *Demystifying the Venus flytrap action potential*, **New Phytologist**. https://doi.org/10.1111/nph.19113
    - Accessible scientific review. Describes trigger hairs, action potentials, short-lived memory (~20 s) and summation of calcium transients. Our model DOES NOT simulate calcium waves or 20 seconds of real time.
 3. H. Suda et al. (2020), *Calcium dynamics during trap closure visualized in transgenic Venus flytrap*, **Nature Plants**, 6, 1219–1224. https://doi.org/10.1038/s41477-020-00773-1
    - Experimental study of calcium signalling during flytrap closure.
@@ -66,3 +66,7 @@ Lower cost is considered better **under this chosen model of consequences**. Som
 Read the papers, check the mathematics, reproduce benchmark outputs, question the cost assumptions, formulate a hypothesis BEFORE changing code, perform a controlled modification, write your own interpretation and explain a failure mode. If you collect independent observations, document the sensor, sampling frequency, procedure, labels and any preprocessing applied.
 
 **Avoid claiming:** you discovered an original algorithm; your system duplicates flytrap biology; Oxford endorsed the project; you alone implemented every line if an AI assistant generated the starter code; the published synthetic results prove real-world superiority.
+
+## Bibliographic verification (2026-10-21)
+
+The Oxford Botanic Garden page, Wiley article (Hedrich and Kreuzer, 2023), Nature Plants article (Suda et al., 2020) and Plant Science correspondence (Rahman, 2026) were checked against publisher records. The 2026 correspondence is a secondary reinterpretation and is not evidence of experiments conducted for this project. DOI access may redirect or be restricted by a publisher.

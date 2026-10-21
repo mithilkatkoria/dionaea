@@ -1,0 +1,26 @@
+name: Quality gate
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: python -m unittest discover -s tests -v
+      - run: python -m dionaea.benchmark
+      - run: python -m scripts.check_reproducibility
+      - run: git diff --exit-code -- experiments/RESULTS.md experiments/benchmark_results.json
+      - run: node --check public/main.js
+      - run: python -m compileall -q .
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser

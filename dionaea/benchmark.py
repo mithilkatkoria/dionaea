@@ -117,8 +117,8 @@ def main():
     data = run()
     path = ROOT / "experiments"
     path.mkdir(exist_ok=True)
-    (path / "benchmark_results.json").write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
-    (path / "RESULTS.md").write_text(markdown_report(data), encoding="utf-8")
+    (path / "benchmark_results.json").write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
+    (path / "RESULTS.md").write_text(markdown_report(data), encoding="utf-8", newline="\n")
     for regime, values in data["results"].items():
         best = min(values, key=lambda m: values[m]["cost"])
         print(f"{regime}: lowest mean cost {best} ({values[best]['cost']})")

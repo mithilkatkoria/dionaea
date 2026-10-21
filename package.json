@@ -1,0 +1,12 @@
+{
+  "name": "dionaea-quality-checks",
+  "private": true,
+  "description": "Browser QA only. The application runtime is Python and static HTML/CSS/JS.",
+  "scripts": {
+    "test:browser": "node scripts/browser-check.cjs"
+  },
+  "devDependencies": {
+    "axe-core": "4.14.0",
+    "playwright": "1.62.1"
+  }
+}

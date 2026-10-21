@@ -6,6 +6,14 @@
 
 This is a **working, AI-assisted starter project**, intended to be studied, challenged and independently extended by a Year 12/13 student. It is not an original plant model or a claim to have invented anomaly detection. Scientific interpretation, synthetic experiments and author contributions are carefully separated.
 
+## The project story
+
+The starting point was an in-person visit to Oxford Botanic Garden during the St John's Inspire summer-school Biomimicry Trail, with the original leaflet retained by the student. Further reading about flytrap signalling motivated a computational question about brief temporal memory. The visit supplies personal motivation, not measurements or institutional endorsement. This is an independent learning project; Oxford has not reviewed or endorsed it.
+
+The browser laboratory compares four standard, causal detectors on the same synthetic binary stream. Change the controls, use Replay/Pause, inspect any revealed step with the keyboard or touch, reset the settings, or download the current synthetic CSV. The methods, saved held-out results, scientific sources and limitations sit alongside the experiment.
+
+![Desktop signal laboratory](docs/screenshots/desktop.png)
+
 ## Quick start (Windows, macOS, Linux)
 
 Requires **Python 3.10 or newer**, no external Python packages. On Windows, you can also double-click `start_windows.bat` (provided Python is installed).
@@ -38,10 +46,13 @@ This records event-level evidence and pre-labelled true episodes without using m
 ## Contents
 
 ```text
-app.py                      local HTTP server + JSON API
-web/index.html              browser lab and methodology
-web/style.css               original responsive lab design
-web/main.js                 interactive event timeline
+app.py                      local development HTTP server
+api/                        Vercel Python entrypoints
+dionaea/http_api.py          shared local/production HTTP boundary
+vercel.json                 Python functions + static public output
+public/index.html              browser lab and methodology
+public/style.css               original responsive lab design
+public/main.js                 interactive event timeline
 
 dionaea/model.py            seeded synthetic stream generator
 dionaea/detectors.py        four causal, explainable algorithms
@@ -84,7 +95,7 @@ Investigate whether the memory parameter should adapt to changes in background e
 ## References
 
 - Oxford Botanic Garden, *Biomimetics*. https://www.botanic-garden.ox.ac.uk/biomimetics-exploiting-plants-design-technology
-- Hedrich (2023), *Demystifying the Venus flytrap action potential*. https://doi.org/10.1111/nph.19113
+- Hedrich & Kreuzer (2023), *Demystifying the Venus flytrap action potential*. https://doi.org/10.1111/nph.19113
 - Suda et al. (2020), *Calcium dynamics during trap closure visualized in transgenic Venus flytrap*. https://doi.org/10.1038/s41477-020-00773-1
 - Oxford CS personal statements: https://www.cs.ox.ac.uk/admissions/undergraduate/how_to_apply/personal-statement.html
 - Cambridge guidance: https://www.undergraduate.study.cam.ac.uk/apply/how/ucas-personal-statement
@@ -99,3 +110,57 @@ You should not claim that Oxford reviewed or endorsed this code, that the algori
 ## Licence
 
 The original project code and written instructions may be reused and modified for educational purposes. Third-party research linked above retains its authors' copyright.
+
+## Published synthetic results
+
+| Environment | Single cost | Pair cost | Count cost | Leaky cost |
+| --- | ---: | ---: | ---: | ---: |
+| moderate / independent noise | 45.51 | 16.02 | 5.34 | 5.02 |
+| sparse true events | 40.41 | 13.42 | 14.63 | 15.34 |
+| high background noise | 67.32 | 35.30 | 8.19 | 7.43 |
+| correlated noise bursts | 46.05 | 23.62 | 10.97 | 10.38 |
+
+Lower cost means fewer mistakes under `4*FN + 2*FP + 0.03*sum(first_detection_delays)`. These weights are subjective. On moderate noise, the single-event baseline detects all episodes but produces 22.62 false alerts per stream on average; the selected leaky detector reduces false alerts to 1.52 while recall falls to 94.5%. In sparse true events, the timed pair has the lowest mean cost. This does not establish universal superiority. See [the full report](experiments/RESULTS.md) for precision, recall, variability and selected parameters.
+
+Pair and count windows include timestamps at exactly `t - window`. A cooldown of 6 ignores the six steps after an alarm. Detector evidence resets on an alarm. Delay is reported for detected episodes only. The interactive defaults are teaching settings, not the frozen settings selected by the benchmark.
+
+## Reproduce the quality checks
+
+```sh
+python -m unittest discover -s tests -v
+python -m dionaea.benchmark
+python -m scripts.check_reproducibility
+node --check public/main.js
+python -m compileall -q .
+```
+
+The reproducibility command compares both report files byte-for-byte against their saved values. The original detector logic, training seeds and held-out seeds are retained. Report writes use LF on all platforms so Windows and Linux reproduce the same bytes.
+
+For browser QA only, install Node.js 22+ and run:
+
+```sh
+npm ci
+npx playwright install chromium
+npm run test:browser
+```
+
+The script starts a local Python server if needed. To test a deployed site, set `BASE_URL` to its real HTTPS URL. Set `BROWSER_CHANNEL=msedge` to use an existing Edge installation. The browser suite checks the five specified widths, controls, keyboard/touch inspection, replay, failures, CSV export and WCAG A/AA rules using axe-core. These automated checks do not replace testing with real assistive technology.
+
+## Deployment architecture
+
+`public/` is the only frontend. `app.py` serves it locally. `api/simulate.py`, `api/benchmark.py` and `api/health.py` are standard-library Vercel Python entrypoints that import the same `dionaea/http_api.py` boundary and engine. There is no JavaScript implementation of the algorithms and no Python runtime dependency to install.
+
+Vercel uses framework **Other**, static output `public`, no build/install command, and Python 3.12 selected by `.python-version`. The benchmark endpoint returns the saved reproducible JSON, rather than retuning on a request. Simulations and health responses are not cached. Static CSS and JavaScript must revalidate; benchmark JSON may be cached at the edge for an hour. The configuration follows the [official Python runtime documentation](https://vercel.com/docs/functions/runtimes/python) and [project configuration documentation](https://vercel.com/docs/project-configuration/vercel-json).
+
+All query values are bounded and validated; duplicate, unknown, empty and non-finite inputs return JSON 400 errors. Unsupported API methods return 405. Static source/private files are not served. Security headers restrict scripts and network requests to this origin and disallow embedding. `.env`, `.vercel`, keys and QA dependencies are excluded from Git. No DNS changes or custom domains are required.
+
+See [the publishing checklist](docs/PUBLISHING_CHECKLIST.md) and [deployment audit](docs/DEPLOYMENT_REPORT.md) for verified links and evidence.
+
+## Responsible contribution record
+
+- The imported starter, explanatory documents and synthetic benchmark were initially AI-assisted.
+- Production HTTP boundaries, browser accessibility/error handling, deployment configuration and QA were also developed with Codex assistance. This does not claim that the student independently implemented or experimentally validated them.
+- Student hypotheses, calculations, readings, code changes and findings remain to be recorded by the student in [the research journal template](docs/RESEARCH_JOURNAL_TEMPLATE.md). The template intentionally contains no personal findings.
+- Git history is current and truthful. The imported starter is recorded separately from the production changes; no commits were backdated.
+
+Known limits: synthetic binary data; subjective cost weights and cooldown; fixed scenario generator; no significance testing or physical sensor validation; mean detection delay excludes missed episodes; no original detector or physiological simulator is claimed. Reusing the existing held-out seeds for further tuning would invalidate their status as an untouched test set.
