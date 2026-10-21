@@ -1,6 +1,6 @@
 {
   "base": "https://dionaea-seven.vercel.app",
-  "application_revision": "591b7d1fd34816ebd48580b16080933d55f8e012",
+  "application_revision": "3d9c6b9dbdb02de733df41714de6eb17fae39fb6",
   "files": [
     {
       "file": "index.html",
@@ -10,7 +10,7 @@
     {
       "file": "main.js",
       "matches": true,
-      "sha256_normalized": "de12c6b4c0285287ae8deba0e8a778a616599c668dbdbbcc3adf1558af195ff9"
+      "sha256_normalized": "94c9f16f1c1ed3cdafcfe449ac003628208ad33347224b7f25bd32874f898503"
     },
     {
       "file": "style.css",

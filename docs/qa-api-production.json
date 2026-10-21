@@ -12,7 +12,7 @@
       "bytes": 13863,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "MISS"
+      "edge_cache": "HIT"
     },
     {
       "path": "/index.html",
@@ -30,16 +30,16 @@
       "bytes": 17306,
       "content_type": "text/css; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "MISS"
+      "edge_cache": "HIT"
     },
     {
       "path": "/main.js",
       "method": "GET",
       "status": 200,
-      "bytes": 12385,
+      "bytes": 12502,
       "content_type": "application/javascript; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "MISS"
+      "edge_cache": "HIT"
     },
     {
       "path": "/favicon.svg",
@@ -48,7 +48,7 @@
       "bytes": 202,
       "content_type": "image/svg+xml",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "MISS"
+      "edge_cache": "HIT"
     },
     {
       "path": "/robots.txt",
@@ -102,7 +102,7 @@
       "bytes": 4032,
       "content_type": "application/json; charset=utf-8",
       "cache_control": "public, max-age=0",
-      "edge_cache": "MISS"
+      "edge_cache": "HIT"
     },
     {
       "path": "/api/benchmark",

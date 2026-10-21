@@ -41,7 +41,7 @@
     {
       "name": "replay completes in elapsed time",
       "passed": true,
-      "remainingReplayMs": 6736
+      "remainingReplayMs": 6734
     },
     {
       "name": "reset stops replay and restores defaults",
