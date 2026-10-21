@@ -36,12 +36,12 @@
     {
       "name": "replay timing, pause, keyboard inspector and future-step restriction",
       "passed": true,
-      "revealedAfter500ms": 28
+      "revealedAfter500ms": 24
     },
     {
       "name": "replay completes in elapsed time",
       "passed": true,
-      "remainingReplayMs": 6647
+      "remainingReplayMs": 6736
     },
     {
       "name": "reset stops replay and restores defaults",

@@ -6,6 +6,18 @@
       "passed": true
     },
     {
+      "name": "zero observed events show N/A detection delay",
+      "passed": true
+    },
+    {
+      "name": "loading state disables stale actions and clears old scores",
+      "passed": true
+    },
+    {
+      "name": "request timeout and recovery",
+      "passed": true
+    },
+    {
       "name": "five responsive widths and zero automated WCAG A/AA violations",
       "passed": true
     },
@@ -24,12 +36,12 @@
     {
       "name": "replay timing, pause, keyboard inspector and future-step restriction",
       "passed": true,
-      "revealedAfter500ms": 26
+      "revealedAfter500ms": 24
     },
     {
       "name": "replay completes in elapsed time",
       "passed": true,
-      "remainingReplayMs": 6737
+      "remainingReplayMs": 6742
     },
     {
       "name": "reset stops replay and restores defaults",

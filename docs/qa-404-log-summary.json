@@ -1,0 +1,36 @@
+[
+  {
+    "status": 404,
+    "path": "/dionaea/model.py",
+    "method": "GET"
+  },
+  {
+    "status": 404,
+    "path": "/app.py",
+    "method": "GET"
+  },
+  {
+    "status": 404,
+    "path": "/.git/config",
+    "method": "GET"
+  },
+  {
+    "status": 404,
+    "path": "/.env",
+    "method": "GET"
+  },
+  {
+    "status": 404,
+    "path": "/api/missing",
+    "method": "GET"
+  },
+  {
+    "status": 404,
+    "path": "/missing",
+    "method": "GET"
+  },
+  {
+    "recordsReturned": 6,
+    "type": "summary"
+  }
+]

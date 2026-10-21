@@ -89,11 +89,11 @@ function inspect(step){
   const max=Math.max(0,Math.min(cursor,data.events.length)-1);
   const t=Math.max(0,Math.min(max,Math.floor(step)));
   $('inspect-step').max=String(max); $('inspect-step').value=String(t); $('inspect-value').textContent=String(t);
-  if(cursor===0){$('inspect-detail').textContent='Replay is at the beginning. No steps have been revealed.';return;}
+  if(cursor===0){const message='Replay is at the beginning. No steps have been revealed.';$('inspect-detail').textContent=message;$('chart-tip').textContent=message;return;}
   const alarms=Object.keys(labels).filter(k=>data.detectors[k].alarms.includes(t)).map(k=>labels[k]);
   const text=`Step ${t}: observed event ${data.events[t]}; ${data.truth[t]?'true episode':'background'}; alarms: ${alarms.join(', ')||'none'}.`;
-  $('inspect-detail').textContent=text;
-  $('chart-tip').textContent=text;
+  if($('inspect-detail').textContent!==text) $('inspect-detail').textContent=text;
+  if($('chart-tip').textContent!==text) $('chart-tip').textContent=text;
 }
 function draw(){
   if(!data)return;
@@ -115,7 +115,7 @@ function draw(){
   $('chart').innerHTML=svg;
   $('chart').dataset.cursor=String(cursor);
   $('inspect-step').max=String(Math.max(0,cursor-1));
-  if(Number($('inspect-step').value)>=cursor) inspect(cursor-1);
+  inspect(Number($('inspect-step').value));
   $('plot-hit').addEventListener('pointermove',event=>{
     const b=event.currentTarget.ownerSVGElement.getBoundingClientRect();
     inspect(((event.clientX-b.left)*W/b.width-left)*n/available);

@@ -69,7 +69,10 @@ async function start(){
  await page.locator('#seed').fill('1000000');await page.waitForFunction(()=>document.querySelector('#data-state').textContent==='CHECK INPUT');assert.equal(await page.locator('#replay').isDisabled(),true);
  await page.locator('#seed').fill('');await page.waitForFunction(()=>document.querySelector('#data-state').textContent==='CHECK INPUT');pass('invalid and empty seed states');
  await page.locator('#reset-btn').click();await ready(page);assert.equal(await page.locator('#seed').inputValue(),'42');
- await page.locator('#replay').click();await pause(500);const revealed=Number(await page.locator('#chart').getAttribute('data-cursor'));assert.ok(revealed>0&&revealed<150);
+ await page.locator('#inspect-step').focus();await page.locator('#inspect-step').press('End');
+ const restart=await page.evaluate(()=>{document.querySelector('#replay').click();return{cursor:document.querySelector('#chart').dataset.cursor,hint:document.querySelector('#chart-tip').textContent,detail:document.querySelector('#inspect-detail').textContent};});
+ assert.equal(restart.cursor,'0');assert.ok(restart.hint.includes('No steps have been revealed'));assert.equal(restart.hint,restart.detail);
+ await pause(500);const revealed=Number(await page.locator('#chart').getAttribute('data-cursor'));assert.ok(revealed>0&&revealed<150);
  await page.locator('#replay').click();const stopped=await page.locator('#chart').getAttribute('data-cursor');await pause(180);assert.equal(await page.locator('#chart').getAttribute('data-cursor'),stopped);
  await page.locator('#inspect-step').focus();await page.locator('#inspect-step').press('End');assert.equal(Number(await page.locator('#inspect-step').inputValue()),Number(stopped)-1);
  assert.ok((await page.locator('#inspect-detail').textContent()).includes('Step '+(Number(stopped)-1)));

@@ -9,16 +9,16 @@
       "path": "/",
       "method": "GET",
       "status": 200,
-      "bytes": 13864,
+      "bytes": 13863,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "HIT"
+      "edge_cache": "MISS"
     },
     {
       "path": "/index.html",
       "method": "GET",
       "status": 200,
-      "bytes": 13864,
+      "bytes": 13863,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
       "edge_cache": "MISS"
@@ -27,10 +27,10 @@
       "path": "/style.css",
       "method": "GET",
       "status": 200,
-      "bytes": 17308,
+      "bytes": 17306,
       "content_type": "text/css; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "HIT"
+      "edge_cache": "MISS"
     },
     {
       "path": "/main.js",
@@ -39,22 +39,22 @@
       "bytes": 12385,
       "content_type": "application/javascript; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "HIT"
+      "edge_cache": "MISS"
     },
     {
       "path": "/favicon.svg",
       "method": "GET",
       "status": 200,
-      "bytes": 203,
+      "bytes": 202,
       "content_type": "image/svg+xml",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "HIT"
+      "edge_cache": "MISS"
     },
     {
       "path": "/robots.txt",
       "method": "GET",
       "status": 200,
-      "bytes": 25,
+      "bytes": 23,
       "content_type": "text/plain; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
       "edge_cache": "MISS"
@@ -102,7 +102,7 @@
       "bytes": 4032,
       "content_type": "application/json; charset=utf-8",
       "cache_control": "public, max-age=0",
-      "edge_cache": "HIT"
+      "edge_cache": "MISS"
     },
     {
       "path": "/api/benchmark",
@@ -180,10 +180,10 @@
       "path": "/missing",
       "method": "GET",
       "status": 404,
-      "bytes": 459,
+      "bytes": 458,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
-      "edge_cache": "HIT"
+      "edge_cache": "MISS"
     },
     {
       "path": "/api/missing",
@@ -198,7 +198,7 @@
       "path": "/.env",
       "method": "GET",
       "status": 404,
-      "bytes": 459,
+      "bytes": 458,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
       "edge_cache": "HIT"
@@ -207,7 +207,7 @@
       "path": "/.git/config",
       "method": "GET",
       "status": 404,
-      "bytes": 459,
+      "bytes": 458,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
       "edge_cache": "HIT"
@@ -216,7 +216,7 @@
       "path": "/app.py",
       "method": "GET",
       "status": 404,
-      "bytes": 459,
+      "bytes": 458,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
       "edge_cache": "HIT"
@@ -225,7 +225,7 @@
       "path": "/dionaea/model.py",
       "method": "GET",
       "status": 404,
-      "bytes": 459,
+      "bytes": 458,
       "content_type": "text/html; charset=utf-8",
       "cache_control": "public, max-age=0, must-revalidate",
       "edge_cache": "HIT"
